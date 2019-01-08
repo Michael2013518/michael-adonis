@@ -29,3 +29,15 @@ Route.get('/posts', async () => {
 })
 
 Route.post('/posts', () => 'posts has been created...')
+
+Route.get('/posts/:id', ({ params}) => {
+  return `You're watching ${ params.id} Posts.`
+})
+
+Route.patch('/posts/:id', ({ params }) => {
+  return `Posts ${ params.id} has been updated.`
+})
+
+Route.delete('/posts/:id', ({ params }) => {
+  return `Posts ${params.id} has been removed.`
+})
