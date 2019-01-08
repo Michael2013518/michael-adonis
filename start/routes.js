@@ -24,20 +24,55 @@ Route.on('/').render('welcome')
 Route.get('/hello','HelloController.render')
 
 // 查询数据表posts
-Route.get('/posts', async () => {
-  return await Database.table('posts').select('*')
-})
+// Route.get('/posts', async () => {
+//   return await Database.table('posts').select('*')
+// })
+// 以下路由可定义为资源路径处理
+Route.resource('posts','PostController')
+     .except(['index'])
+     .only(['index','show'])
+     .apiOnly() //去除创建，编辑资源的路由
+// 命名路由
+/* Route.get('/users', () => 'List of users')
+      .as('users.index')
+*/
+/*
+Route.get('/users', ({ request }) => {
+    switch (request.format()) {
+      case 'json':
+        return [
+          {name:'michael'},
+          {name:'Cathy'}
+        ]
+      default:
+       return `
+        -michael
+        -cathy
+       `
 
-Route.post('/posts', () => 'posts has been created...')
-
-Route.get('/posts/:id', ({ params}) => {
-  return `You're watching ${ params.id} Posts.`
+    }
 })
-
-Route.patch('/posts/:id', ({ params }) => {
-  return `Posts ${ params.id} has been updated.`
+.formats(['json'])
+*/
+Route.group(() => {
+  Route.get('users',()=>'Manage users')
+  Route.get('posts',()=>'Manage posts')
 })
+.prefix('admin')
 
-Route.delete('/posts/:id', ({ params }) => {
-  return `Posts ${params.id} has been removed.`
-})
+Route.any('*',({ view }) => view.render('welcome') )
+/*
+Route.get('/posts','PostController.index')
+
+Route.post('/posts', 'PostController.store')
+
+Route.get('/posts/create', 'PostController.create')
+
+Route.get('/posts/:id', 'PostController.show')
+
+Route.patch('/posts/:id', 'PostController.update')
+
+Route.delete('/posts/:id', 'PostController.destory')
+
+Route.get('/posts/:id/edit', 'PostController.edit')
+*/
