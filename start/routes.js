@@ -24,6 +24,8 @@ Route.on('/').render('welcome')
 Route.get('/hello','HelloController.render')
 
 // 查询数据表posts
-Route.get('/post', async () => {
+Route.get('/posts', async () => {
   return await Database.table('posts').select('*')
 })
+
+Route.post('/posts', () => 'posts has been created...')
