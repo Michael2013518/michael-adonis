@@ -14,6 +14,16 @@
 */
 
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
+const Database = use('Database') //添加use
 const Route = use('Route')
 
 Route.on('/').render('welcome')
+// Route.get('/hello', ({ request })=> {
+//    return `hello ${ request.input('name')}`
+// })
+Route.get('/hello','HelloController.render')
+
+// 查询数据表posts
+Route.get('/post', async () => {
+  return await Database.table('posts').select('*')
+})
