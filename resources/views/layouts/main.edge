@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    {{ style('css/main') }}
+    {{ script('js/main') }}
+    <title>{{ pageTitle || 'Michael'}}</title>
+  </head>
+  <body style="background:url({{ assetsUrl('splash.png')}})">
+    <div>
+      <small>url:</small>{{ request.url() }}<br>
+      <small>originalUrl:</small>{{ request.originalUrl()}}<br>
+      <small>Method:</small> {{ request.method() }}<br>
+      <small>Protocol:</small> {{ request.protocol()}}<br>
+    </div>
+  <div class="container">
+    <div class="header">
+      @section('header')
+      <small>_headerSection_</small>
+      @endsection
+    </div>
+    <div class="content">
+      @section('content')
+      <p>There is no content yet.</p>
+      @endsection
+    </div>
+    @include('partials.footer')
+  </div>
+  </body>
+</html>

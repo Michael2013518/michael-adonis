@@ -1,0 +1,14 @@
+@layout('layouts.main')
+
+@section('header')
+{{-- @super --}}
+<h1>{{ pageTitle || 'untitled' }}</h1>
+@endsection
+
+@section('content')
+@component('components.list',{ entities,border:true,borderColor:'#ddd' })
+@slot('notes')
+<small>eat some fruit every day!</small>
+@endslot
+@endcomponent
+@endsection
